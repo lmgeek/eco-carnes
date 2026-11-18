@@ -136,7 +136,7 @@ La imagen usa nginx y genera `js/config.js` al arrancar desde variables de entor
 2. En Dokploy: **Project → Create App → Source** y selecciona el repositorio.
 3. En **Build**, elige una de estas dos opciones (importante: no uses Nixpacks):
    - **Dockerfile**: archivo `Dockerfile` en la raíz. Si Dokploy te pide el puerto, pon **80**; si deja el **3000** por defecto también funciona, porque el contenedor escucha en ambos.
-   - **Docker Compose**: archivo `docker-compose.yml` en la raíz; el servicio `menu` expone el puerto **80** y el contenedor escucha también en el 3000.
+   - **Docker Compose**: archivo `docker-compose.yml` en la raíz. No publica puertos en el host (Traefik ya usa el 80); el contenedor escucha en **80** y **3000** y Dokploy lo alcanza por la red interna.
 4. En **Environment**, carga estas variables:
 
 | Variable | Valor |
@@ -157,9 +157,10 @@ La imagen usa nginx y genera `js/config.js` al arrancar desde variables de entor
 El 502 significa que Traefik no puede alcanzar el contenedor (la ruta al dominio sí existe). Revisa, en este orden:
 
 1. **Build type = Dockerfile** (o Docker Compose), no Nixpacks.
-2. El contenedor debe estar **running/healthy**; revisa los logs del app en Dokploy.
-3. El puerto de la app debe ser **80** o **3000** (la imagen escucha en ambos).
-4. Tras cambiar cualquier ajuste, haz **Redeploy**.
+2. Si usas Compose, **no publiques `80:80` en el host**: Traefik ya ocupa ese puerto y el contenedor no podría arrancar. Usa `expose`, como en el `docker-compose.yml` incluido.
+3. El contenedor debe estar **running/healthy**; revisa los logs del app en Dokploy.
+4. El puerto de la app debe ser **80** o **3000** (la imagen escucha en ambos).
+5. Tras cambiar cualquier ajuste, haz **Redeploy**.
 
 Puedes comprobarlo con `curl -I https://tu-dominio/`: debe devolver `HTTP/2 200`.
 

@@ -4,10 +4,12 @@ services:
       context: .
       dockerfile: Dockerfile
     image: eco-carnes-menu:latest
-    container_name: eco-carnes-menu
     restart: unless-stopped
-    ports:
-      - "80:80"
+    # Dokploy/Traefik ya ocupa el puerto 80 del host. No publicar puertos aquí:
+    # Traefik alcanza el contenedor por la red interna de Docker.
+    expose:
+      - "80"
+      - "3000"
     environment:
       SUPABASE_URL: ${SUPABASE_URL:-}
       SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
