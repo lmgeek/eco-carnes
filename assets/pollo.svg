@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Ilustración de un corte de pollo">
+  <rect width="800" height="600" fill="#e9e0d1"/>
+  <g stroke="#221f1b" stroke-opacity="0.07" stroke-width="1">
+    <path d="M0 80h800M0 180h800M0 280h800M0 380h800M0 480h800M100 0v600M220 0v600M340 0v600M460 0v600M580 0v600M700 0v600"/>
+  </g>
+  <path d="M196 296c-18-88 58-172 172-190 128-20 252 34 298 118 40 74 4 166-72 214-86 54-214 58-310 8-66-34-76-88-88-150Z" fill="#221f1b" opacity="0.14" transform="translate(10 14)"/>
+  <path d="M196 296c-18-88 58-172 172-190 128-20 252 34 298 118 40 74 4 166-72 214-86 54-214 58-310 8-66-34-76-88-88-150Z" fill="#f1e2cc" stroke="#221f1b" stroke-width="5"/>
+  <path d="M240 292c-14-70 46-136 138-150 104-16 204 28 242 96 32 60 2 134-58 172-70 44-174 46-252 6-54-28-60-72-70-124Z" fill="#dfc4a0"/>
+  <path d="M286 288c-10-52 36-102 108-112 80-12 158 22 188 74 24 46 2 104-44 132-54 34-134 36-196 4-42-22-48-56-56-98Z" fill="#ecd6b6"/>
+  <g fill="none" stroke="#d0ac83" stroke-linecap="round" opacity="0.7">
+    <path d="M330 250c40-24 88-32 132-22" stroke-width="6"/>
+    <path d="M350 304c46-20 96-22 142-8" stroke-width="5"/>
+    <path d="M340 350c44-14 88-14 128 0" stroke-width="4"/>
+  </g>
+  <text x="42" y="558" fill="#5e564c" font-family="monospace" font-size="25" letter-spacing="8">POLLO / CORTE</text>
+</svg>

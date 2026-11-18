@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#9b2c2c" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <meta
+      name="description"
+      content="Carta digital de Eco Carnes. Elige tus cortes y envía el pedido por WhatsApp."
+    />
+    <title>Carta | Eco Carnes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="page-public">
+    <div class="demo-banner" id="demo-banner" hidden>
+      <span>
+        <strong>Modo demostración.</strong> Estás viendo productos de ejemplo.
+        <a href="README.md">Configura Supabase y Cloudinary</a> para publicar los tuyos.
+      </span>
+      <button class="demo-banner__close" id="hide-demo-banner" aria-label="Cerrar aviso">×</button>
+    </div>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="brand" href="#catalogo" aria-label="Ir a la carta">
+          <img class="brand__logo" src="assets/logo.webp" alt="Eco Carnes" />
+          <span class="brand__text">
+            <span class="sr-only" id="brand-name">Eco Carnes</span>
+            <span class="brand__sub">Carnicería · Pedidos por WhatsApp</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="#catalogo">La carta</a>
+          <a href="admin.html" class="site-nav__admin">Administración</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <p class="eyebrow">Abra · elija · envíe</p>
+          <h1 id="hero-title">El corte que quieres,<br /><em>sin esperar en fila.</em></h1>
+          <p class="hero__lead">
+            Mira lo que hay disponible hoy, arma tu pedido y mandalo directo al mostrador.
+            Nosotros confirmamos peso y precio final por WhatsApp.
+          </p>
+          <ol class="hero__steps" aria-label="Cómo hacer tu pedido">
+            <li>
+              <span class="hero__step-num">01</span>
+              <span class="hero__step-text">Elegí los cortes</span>
+            </li>
+            <li>
+              <span class="hero__step-num">02</span>
+              <span class="hero__step-text">Escribí tu nombre</span>
+            </li>
+            <li>
+              <span class="hero__step-num">03</span>
+              <span class="hero__step-text">Enviá por WhatsApp</span>
+            </li>
+          </ol>
+        </div>
+        <div class="hero__aside" aria-hidden="true">
+          <div class="hero__stamp">
+            <span class="hero__stamp-top">Pedidos</span>
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor">
+              <path
+                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.05a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.14.82.84-3.06-.2-.31a8.07 8.07 0 0 1-1.24-4.28c0-4.47 3.64-8.11 8.12-8.11 4.47 0 8.11 3.64 8.11 8.11 0 4.48-3.64 8.14-8.06 8.14Zm4.46-6.08c-.24-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.24-.64.8-.79.96-.14.16-.29.18-.53.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.29.36-.43.12-.15.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.57.18 1.09.16 1.5.1.46-.07 1.46-.6 1.66-1.17.21-.58.21-1.07.15-1.17-.06-.1-.22-.16-.46-.28Z"
+              />
+            </svg>
+            <span class="hero__stamp-bottom">al mostrador</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="catalogo wrap" id="catalogo" aria-labelledby="catalogo-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Carta del día</p>
+            <h2 id="catalogo-title">Lo que tenemos</h2>
+          </div>
+          <p class="section-head__note">
+            Precios por unidad. El valor final puede variar según el peso real.
+          </p>
+        </div>
+
+        <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+
+        <div class="productos" id="productos" aria-live="polite"></div>
+
+        <div class="estado-vacio" id="estado-vacio" hidden>
+          <p class="estado-vacio__title">No hay productos para mostrar.</p>
+          <p id="estado-vacio-texto">Cuando el administrador cargue la carta, vas a ver los cortes acá.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <div>
+          <p class="site-footer__brand" id="footer-name">Eco Carnes</p>
+          <p class="site-footer__note">Pedidos y consultas por WhatsApp. Precios sujetos a peso final.</p>
+        </div>
+        <a href="admin.html">Ingresar como administrador →</a>
+      </div>
+    </footer>
+
+    <button class="cart-fab" id="cart-fab" aria-label="Abrir el carrito" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z" stroke-linejoin="round" />
+        <path d="M9 8h6M9 12h6" stroke-linecap="round" />
+      </svg>
+      <span class="cart-fab__label">Mi pedido</span>
+      <span class="cart-fab__count" id="cart-count">0</span>
+    </button>
+
+    <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+
+    <aside class="ticket" id="cart-drawer" aria-label="Tu pedido" aria-hidden="true">
+      <div class="ticket__head">
+        <div>
+          <p class="ticket__eyebrow">Comprobante de pedido</p>
+          <h2>Tu carrito</h2>
+        </div>
+        <button class="icon-btn" id="close-cart" aria-label="Cerrar carrito">×</button>
+      </div>
+      <div class="ticket__tear" aria-hidden="true"></div>
+
+      <div class="ticket__body">
+        <div class="ticket__items" id="cart-items"></div>
+        <p class="ticket__empty" id="cart-empty">Todavía no agregaste ningún corte.</p>
+      </div>
+
+      <div class="ticket__foot">
+        <div class="ticket__total">
+          <span>Total estimado</span>
+          <strong id="cart-total">$0</strong>
+        </div>
+
+        <div class="field field--compact">
+          <label for="customer-name">Tu nombre</label>
+          <input id="customer-name" type="text" autocomplete="name" placeholder="¿A quién le preparamos el pedido?" maxlength="80" />
+        </div>
+        <div class="field field--compact">
+          <label for="customer-note">Nota (opcional)</label>
+          <textarea id="customer-note" rows="2" placeholder="Ej.: retiro después de las 5 pm" maxlength="240"></textarea>
+        </div>
+
+        <button class="btn-whatsapp" id="send-whatsapp" disabled>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.05a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.14.82.84-3.06-.2-.31a8.07 8.07 0 0 1-1.24-4.28c0-4.47 3.64-8.11 8.12-8.11 4.47 0 8.11 3.64 8.11 8.11 0 4.48-3.64 8.14-8.06 8.14Zm4.46-6.08c-.24-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.24-.64.8-.79.96-.14.16-.29.18-.53.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.29.36-.43.12-.15.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.57.18 1.09.16 1.5.1.46-.07 1.46-.6 1.66-1.17.21-.58.21-1.07.15-1.17-.06-.1-.22-.16-.46-.28Z" />
+          </svg>
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="ticket__hint">Se abre un chat con el pedido ya redactado. El precio se confirma ahí.</p>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/public.js"></script>
+  </body>
+</html>

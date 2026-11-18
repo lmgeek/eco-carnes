@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Ilustración de un corte de res">
+  <rect width="800" height="600" fill="#e9e0d1"/>
+  <g stroke="#221f1b" stroke-opacity="0.07" stroke-width="1">
+    <path d="M0 80h800M0 180h800M0 280h800M0 380h800M0 480h800M100 0v600M220 0v600M340 0v600M460 0v600M580 0v600M700 0v600"/>
+  </g>
+  <path d="M162 292c-16-84 46-166 148-184 122-22 258 8 328 82 62 66 42 168-22 226-74 68-206 92-330 62-96-24-112-102-124-186Z" fill="#221f1b" opacity="0.14" transform="translate(10 14)"/>
+  <path d="M162 292c-16-84 46-166 148-184 122-22 258 8 328 82 62 66 42 168-22 226-74 68-206 92-330 62-96-24-112-102-124-186Z" fill="#f0d9c2" stroke="#221f1b" stroke-width="5"/>
+  <path d="M205 288c-10-68 42-136 124-150 100-18 216 6 278 68 52 55 36 140-18 190-62 56-172 76-276 50-80-20-98-84-108-158Z" fill="#8f2f2b"/>
+  <path d="M250 285c-6-52 34-104 98-114 78-14 168 4 216 52 40 42 28 108-14 146-48 44-134 58-214 38-62-16-76-64-86-122Z" fill="#a83b32"/>
+  <g fill="none" stroke="#e9c6a8" stroke-linecap="round" opacity="0.75">
+    <path d="M290 250c40-30 92-44 148-38" stroke-width="7"/>
+    <path d="M318 300c50-32 108-40 166-26" stroke-width="6"/>
+    <path d="M300 348c56-24 112-26 166-10" stroke-width="5"/>
+    <path d="M360 390c40-10 78-8 112 4" stroke-width="4"/>
+  </g>
+  <text x="42" y="558" fill="#5e564c" font-family="monospace" font-size="25" letter-spacing="8">RES / CORTE</text>
+</svg>

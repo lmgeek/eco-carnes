@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#9b2c2c" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <title>Administración | Eco Carnes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="page-admin">
+    <div class="demo-banner" id="demo-banner" hidden>
+      <span>
+        <strong>Modo demostración.</strong> Cualquier correo y contraseña sirven para entrar;
+        los cambios se guardan solo en este navegador.
+      </span>
+      <a href="README.md">Ver configuración</a>
+    </div>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="brand" href="index.html" aria-label="Ir a la carta">
+          <img class="brand__logo" src="assets/logo.webp" alt="Eco Carnes" />
+          <span class="brand__text">
+            <span class="brand__name">Panel de administración</span>
+            <span class="brand__sub" id="admin-business">Eco Carnes</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="index.html">← Ver la carta</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap admin-main">
+      <!-- Acceso -->
+      <section class="login-view" id="login-view">
+        <div class="login-card">
+          <img class="login-card__logo" src="assets/logo.webp" alt="Eco Carnes" />
+          <p class="eyebrow">Acceso privado</p>
+          <h1>Ingresá al panel</h1>
+          <p class="login-card__lead">Gestioná los productos y los datos del pedido por WhatsApp.</p>
+          <form id="login-form" novalidate>
+            <div class="field">
+              <label for="login-email">Correo</label>
+              <input id="login-email" type="email" autocomplete="username" placeholder="admin@ejemplo.com" required />
+            </div>
+            <div class="field">
+              <label for="login-password">Contraseña</label>
+              <input id="login-password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+            </div>
+            <p class="form-error" id="login-error" role="alert" hidden></p>
+            <button class="btn-primary" type="submit" id="login-submit">Ingresar</button>
+          </form>
+          <p class="login-card__hint" id="login-hint" hidden>
+            Modo demostración: usá cualquier correo y contraseña.
+          </p>
+        </div>
+      </section>
+
+      <!-- Panel -->
+      <section class="panel-view" id="panel-view" hidden>
+        <div class="panel-topbar">
+          <div>
+            <p class="eyebrow">Panel</p>
+            <h1>Buen día, administrador</h1>
+          </div>
+          <div class="panel-topbar__right">
+            <span class="panel-user" id="panel-user"></span>
+            <button class="btn-ghost" id="logout">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Secciones del panel">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="productos">
+            Productos
+          </button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="config">
+            Configuración
+          </button>
+        </div>
+
+        <div class="tab-panel" id="tab-productos" role="tabpanel">
+          <div class="panel-section-head">
+            <div>
+              <h2>Productos</h2>
+              <p>Cargá, editá u ocultá los cortes que ve el cliente.</p>
+            </div>
+            <button class="btn-primary" id="new-product">+ Nuevo producto</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Categoría</th>
+                  <th>Estado</th>
+                  <th class="product-table__actions-head">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="productos-body"></tbody>
+            </table>
+          </div>
+          <p class="panel-empty" id="panel-empty" hidden>No cargaste productos todavía.</p>
+        </div>
+
+        <div class="tab-panel" id="tab-config" role="tabpanel" hidden>
+          <div class="panel-section-head">
+            <div>
+              <h2>Configuración</h2>
+              <p>Estos datos se usan al armar el mensaje de WhatsApp.</p>
+            </div>
+          </div>
+          <form class="config-form" id="config-form" novalidate>
+            <div class="field">
+              <label for="cfg-nombre">Nombre del negocio</label>
+              <input id="cfg-nombre" type="text" maxlength="80" required />
+              <small>Aparece en la carta y arriba del panel.</small>
+            </div>
+            <div class="field">
+              <label for="cfg-whatsapp">Número de WhatsApp</label>
+              <input id="cfg-whatsapp" type="tel" inputmode="numeric" placeholder="573001234567" required />
+              <small>Con código de país y sin el signo +. Ej.: 573001234567.</small>
+            </div>
+            <div class="field">
+              <label for="cfg-moneda">Símbolo de moneda</label>
+              <input id="cfg-moneda" type="text" maxlength="4" placeholder="$" />
+            </div>
+            <div class="field">
+              <label for="cfg-mensaje">Mensaje inicial</label>
+              <textarea id="cfg-mensaje" rows="2" maxlength="200"></textarea>
+              <small>Ej.: Hola, quiero hacer un pedido:</small>
+            </div>
+            <p class="form-error" id="config-error" role="alert" hidden></p>
+            <button class="btn-primary" type="submit" id="config-submit">Guardar configuración</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="product-dialog" id="product-dialog" aria-labelledby="dialog-title">
+      <form id="product-form" novalidate>
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Producto</p>
+            <h2 id="dialog-title">Nuevo producto</h2>
+          </div>
+          <button class="icon-btn" type="button" id="close-dialog" aria-label="Cerrar formulario">×</button>
+        </div>
+
+        <div class="dialog-body">
+          <div class="field">
+            <label for="p-nombre">Nombre</label>
+            <input id="p-nombre" type="text" maxlength="80" placeholder="Ej.: Lomo fino" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="p-precio">Precio</label>
+              <input id="p-precio" type="number" min="0" step="0.01" placeholder="24900" required />
+            </div>
+            <div class="field">
+              <label for="p-unidad">Unidad</label>
+              <input id="p-unidad" type="text" maxlength="20" placeholder="kg" list="unidades" />
+              <datalist id="unidades">
+                <option value="kg"></option>
+                <option value="libra"></option>
+                <option value="porción"></option>
+                <option value="unidad"></option>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="p-categoria">Categoría</label>
+              <input id="p-categoria" type="text" maxlength="40" placeholder="Res, cerdo, pollo…" list="categorias" />
+              <datalist id="categorias">
+                <option value="Res"></option>
+                <option value="Cerdo"></option>
+                <option value="Pollo"></option>
+                <option value="Quesos"></option>
+              </datalist>
+            </div>
+            <div class="field">
+              <label for="p-orden">Orden</label>
+              <input id="p-orden" type="number" step="1" placeholder="0" />
+              <small>Menor número aparece primero.</small>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="p-imagen">Imagen</label>
+            <input id="p-imagen" type="file" accept="image/png,image/jpeg,image/webp" />
+            <div class="upload-preview" id="upload-preview" hidden>
+              <img id="upload-preview-img" alt="Vista previa de la imagen" />
+              <div class="upload-bar"><span id="upload-bar-fill"></span></div>
+              <span class="upload-text" id="upload-text"></span>
+            </div>
+            <small>Se sube a Cloudinary. JPG, PNG o WebP hasta 8 MB.</small>
+          </div>
+
+          <label class="switch">
+            <input id="p-activo" type="checkbox" checked />
+            <span>Mostrar en la carta pública</span>
+          </label>
+
+          <p class="form-error" id="product-error" role="alert" hidden></p>
+        </div>
+
+        <div class="dialog-foot">
+          <button class="btn-ghost" type="button" id="cancel-dialog">Cancelar</button>
+          <button class="btn-primary" type="submit" id="save-product">Guardar producto</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>

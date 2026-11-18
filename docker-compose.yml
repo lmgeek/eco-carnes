@@ -1,0 +1,16 @@
+services:
+  menu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: eco-carnes-menu:latest
+    container_name: eco-carnes-menu
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_UPLOAD_PRESET: ${CLOUDINARY_UPLOAD_PRESET:-}
+      CLOUDINARY_FOLDER: ${CLOUDINARY_FOLDER:-carnes}
