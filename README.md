@@ -134,9 +134,9 @@ La imagen usa nginx y genera `js/config.js` al arrancar desde variables de entor
 
 1. Sube esta carpeta a un repositorio de GitHub/GitLab (Dokploy también permite subir archivos directamente).
 2. En Dokploy: **Project → Create App → Source** y selecciona el repositorio.
-3. En **Build**, elige una de estas dos opciones:
-   - **Dockerfile**: archivo `Dockerfile` en la raíz y puerto **80**.
-   - **Docker Compose**: archivo `docker-compose.yml` en la raíz; el servicio `menu` expone el puerto **80**.
+3. En **Build**, elige una de estas dos opciones (importante: no uses Nixpacks):
+   - **Dockerfile**: archivo `Dockerfile` en la raíz. Si Dokploy te pide el puerto, pon **80**; si deja el **3000** por defecto también funciona, porque el contenedor escucha en ambos.
+   - **Docker Compose**: archivo `docker-compose.yml` en la raíz; el servicio `menu` expone el puerto **80** y el contenedor escucha también en el 3000.
 4. En **Environment**, carga estas variables:
 
 | Variable | Valor |
@@ -151,6 +151,17 @@ La imagen usa nginx y genera `js/config.js` al arrancar desde variables de entor
 6. Genera el QR apuntando a la URL pública, por ejemplo `https://tu-dominio/`.
 
 > Si dejas las credenciales vacías, el sitio publicado queda en modo demostración. Cárgalas antes de entregarlo.
+
+### Si el dominio da 502 Bad Gateway
+
+El 502 significa que Traefik no puede alcanzar el contenedor (la ruta al dominio sí existe). Revisa, en este orden:
+
+1. **Build type = Dockerfile** (o Docker Compose), no Nixpacks.
+2. El contenedor debe estar **running/healthy**; revisa los logs del app en Dokploy.
+3. El puerto de la app debe ser **80** o **3000** (la imagen escucha en ambos).
+4. Tras cambiar cualquier ajuste, haz **Redeploy**.
+
+Puedes comprobarlo con `curl -I https://tu-dominio/`: debe devolver `HTTP/2 200`.
 
 ### Probar la imagen en local
 
