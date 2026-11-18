@@ -158,7 +158,7 @@ El 502 significa que Traefik no puede alcanzar el contenedor (la ruta al dominio
 
 1. **Build type = Dockerfile** (o Docker Compose), no Nixpacks.
 2. Si usas Compose, **no publiques `80:80` en el host**: Traefik ya ocupa ese puerto y el contenedor no podría arrancar. Usa `expose`, como en el `docker-compose.yml` incluido.
-3. El contenedor debe estar **running/healthy**; revisa los logs del app en Dokploy.
+3. El contenedor debe estar **running/healthy**. El healthcheck usa `127.0.0.1` porque en Alpine `localhost` resuelve a IPv6 y nginx podría no estar escuchando ahí; revisa los logs del app en Dokploy.
 4. El puerto de la app debe ser **80** o **3000** (la imagen escucha en ambos).
 5. Tras cambiar cualquier ajuste, haz **Redeploy**.
 
